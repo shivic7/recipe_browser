@@ -1,0 +1,47 @@
+<% content_for :title, "Your Pantry - What's for Dinner" %>
+
+<h1>What's in your kitchen?</h1>
+<p class="subtitle">Add the ingredients you have on hand, then see which recipes you're closest to being able to cook.</p>
+
+<%= form_with url: pantry_items_path, method: :get, class: "search-form" do |f| %>
+  <%= f.text_field :q, value: @query, placeholder: "Search ingredients, e.g. chicken, garlic, rice…", autofocus: true %>
+  <%= f.submit "Search" %>
+<% end %>
+
+<% if @query.present? %>
+  <section>
+    <h2>Results for &ldquo;<%= @query %>&rdquo;</h2>
+    <% if @suggestions.any? %>
+      <ul class="suggestion-list">
+        <% @suggestions.each do |ingredient| %>
+          <li>
+            <%= ingredient.name %>
+            <%= button_to "+", pantry_items_path(ingredient_id: ingredient.id, q: @query), method: :post, form_class: "inline", title: "Add #{ingredient.name}" %>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p class="empty-state">No ingredients match &ldquo;<%= @query %>&rdquo;. Try a different word.</p>
+    <% end %>
+  </section>
+<% end %>
+
+<section>
+  <h2>Your pantry (<%= @pantry_ingredients.size %>)</h2>
+  <% if @pantry_ingredients.any? %>
+    <ul class="pantry-list">
+      <% @pantry_ingredients.each do |ingredient| %>
+        <li>
+          <%= ingredient.name %>
+          <%= button_to "×", pantry_item_path(ingredient.id, q: @query), method: :delete, form_class: "inline", title: "Remove #{ingredient.name}" %>
+        </li>
+      <% end %>
+    </ul>
+    <p>
+      <%= link_to "Find recipes →", recipes_path, class: "button" %>
+      <%= button_to "Clear pantry", clear_pantry_items_path, method: :delete, form_class: "inline", class: "button secondary" %>
+    </p>
+  <% else %>
+    <p class="empty-state">Nothing yet — search above and add a few ingredients.</p>
+  <% end %>
+</section>
