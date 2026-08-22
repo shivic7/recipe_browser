@@ -26,7 +26,7 @@ class Recipe < ApplicationRecord
     join_sql = sanitize_sql_array([ MATCHED_INGREDIENTS_JOIN, ingredient_ids ])
 
     joins(join_sql)
-      .where("matched.matched_count >= ?", MIN_INGREDIENTS_FOR_RANKING)
+      .where("matched.matched_count >= ?", MIN_INGREDIENTS_FOR_RANKING - 1)
       .select("recipes.*, matched.matched_count AS matched_count, totals.total_count AS total_count, (matched.matched_count::float / totals.total_count) AS match_ratio")
       .order(Arel.sql("match_ratio DESC, matched.matched_count DESC, recipes.rating DESC NULLS LAST"))
   end
