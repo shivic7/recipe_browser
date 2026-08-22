@@ -1,0 +1,24 @@
+pancakes:
+  title: Pancakes
+  category: Breakfast
+  cuisine: American
+  author: Tester
+  image_url: https://example.com/pancakes.jpg
+  prep_time_minutes: 10
+  cook_time_minutes: 15
+  rating: 4.5
+
+omelette:
+  title: Omelette
+  category: Breakfast
+  author: Tester
+  prep_time_minutes: 5
+  cook_time_minutes: 5
+  rating: 4.0
+
+salted_egg:
+  title: Salted Egg
+  category: Snack
+  prep_time_minutes: 2
+  cook_time_minutes: 5
+  rating: 3.0

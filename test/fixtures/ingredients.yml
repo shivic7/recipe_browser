@@ -1,0 +1,14 @@
+egg:
+  name: egg
+
+flour:
+  name: flour
+
+milk:
+  name: milk
+
+sugar:
+  name: sugar
+
+salt:
+  name: salt

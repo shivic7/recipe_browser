@@ -1,0 +1,59 @@
+pancakes_egg:
+  recipe: pancakes
+  ingredient: egg
+  raw_text: 1 egg
+  position: 0
+
+pancakes_flour:
+  recipe: pancakes
+  ingredient: flour
+  raw_text: 2 cups flour
+  position: 1
+
+pancakes_milk:
+  recipe: pancakes
+  ingredient: milk
+  raw_text: 1 cup milk
+  position: 2
+
+pancakes_sugar:
+  recipe: pancakes
+  ingredient: sugar
+  raw_text: 1 tablespoon sugar
+  position: 3
+
+pancakes_salt:
+  recipe: pancakes
+  ingredient: salt
+  raw_text: 1 pinch salt
+  position: 4
+
+omelette_egg:
+  recipe: omelette
+  ingredient: egg
+  raw_text: 2 eggs
+  position: 0
+
+omelette_milk:
+  recipe: omelette
+  ingredient: milk
+  raw_text: 1 splash milk
+  position: 1
+
+omelette_salt:
+  recipe: omelette
+  ingredient: salt
+  raw_text: 1 pinch salt
+  position: 2
+
+salted_egg_egg:
+  recipe: salted_egg
+  ingredient: egg
+  raw_text: 1 egg
+  position: 0
+
+salted_egg_salt:
+  recipe: salted_egg
+  ingredient: salt
+  raw_text: 1 pinch salt
+  position: 1
