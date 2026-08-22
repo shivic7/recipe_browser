@@ -38,7 +38,14 @@
       <% end %>
     </ul>
     <p>
-      <%= link_to "Find recipes →", recipes_path, class: "button" %>
+      <% remaining = [ Recipe::MIN_INGREDIENTS_FOR_RANKING - @pantry_ingredients.size, 0 ].max %>
+      <% if remaining.positive? %>
+        <p class="empty-state">
+          Add <%= remaining %> more <%= remaining == 1 ? "ingredient" : "ingredients" %> to see recipe matches.
+        </p>
+      <% else %>
+        <p><%= link_to "Find recipes →", recipes_path, class: "button" %></p>
+      <% end %>
       <%= button_to "Clear pantry", clear_pantry_items_path, method: :delete, form_class: "inline", class: "button secondary" %>
     </p>
   <% else %>

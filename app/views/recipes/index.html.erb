@@ -1,0 +1,25 @@
+<% content_for :title, "Recipes You Can Make - What's for Dinner" %>
+
+<h1>Recipes you can make</h1>
+<p class="subtitle">Ranked by how much of each recipe you already have (<%= link_to "edit your pantry", pantry_items_path %>).</p>
+
+<% if @recipes.empty? %>
+  <p class="empty-state">No recipes matched your pantry ingredients yet.</p>
+<% else %>
+  <div class="recipe-grid">
+    <% @recipes.each do |recipe| %>
+      <%= link_to recipe_path(recipe), class: "recipe-card" do %>
+        <% if recipe.image_url.present? %><img src="<%= recipe.image_url %>" alt="" loading="lazy"><% end %>
+        <div class="recipe-card-body">
+          <span class="match-badge <%= recipe.matched_count == recipe.total_count ? "full" : "partial" %>">
+            <%= recipe.matched_count %>/<%= recipe.total_count %> ingredients you have
+          </span>
+          <h3><%= recipe.title %></h3>
+          <% missing = missing_ingredient_names(recipe, @pantry_ingredient_ids) %>
+          <% if missing.present? %><p class="missing-note">Missing: <%= missing %></p><% end %>
+          <p class="recipe-meta"><%= recipe_time_summary(recipe) %></p>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

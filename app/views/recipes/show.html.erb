@@ -1,0 +1,26 @@
+<% content_for :title, "#{@recipe.title} - What's for Dinner" %>
+
+<p><%= link_to "← Back to results", recipes_path %></p>
+<% if @recipe.image_url.present? %><img src="<%= @recipe.image_url %>" alt="" class="recipe-hero-image"><% end %>
+
+<h1><%= @recipe.title %></h1>
+<p class="recipe-meta">
+  <%= [ @recipe.category.presence, @recipe.cuisine.presence, @recipe.author.presence&.then { |a| "by #{a}" } ].compact.join(" · ") %>
+  <% if @recipe.rating.present? %> · ★ <%= @recipe.rating %><% end %>
+</p>
+<p class="recipe-meta"><%= recipe_time_summary(@recipe) %></p>
+
+<section>
+  <h2>Ingredients</h2>
+  <ul class="ingredient-list">
+    <% @recipe.recipe_ingredients.each do |ri| %>
+      <% have = @pantry_ingredient_ids.include?(ri.ingredient_id) %>
+      <li class="<%= have ? "have" : "missing" %>">
+        <span class="mark"><%= have ? "✓" : "—" %></span>
+        <span><%= ri.raw_text %></span>
+      </li>
+    <% end %>
+  </ul>
+</section>
+
+<p class="data-note">This demo dataset doesn't include cooking instructions, so this prototype focuses on deciding <em>which</em> recipe to cook.</p>
