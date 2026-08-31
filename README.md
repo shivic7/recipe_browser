@@ -85,18 +85,11 @@ this specific recipe overlap with you enough to bother showing." Both
 numbers came from just trying values against the real dataset until
 results looked sane, not from any formula.
 
-## Other decisions worth mentioning
+## Other decisions worth Improvements
 
-**One controller for the pantry, not two.** Originally split "view/search
-the pantry" and "add or remove an item" into separate controllers, but the
-pantry isn't really its own resource — it's just an array of ids in the
-session, no attributes of its own. Merged it into one
-`PantryItemsController` (index/create/destroy) once that became obvious.
-
-**Search uses pg_trgm.** `Ingredient.search` does fuzzy matching via
-Postgres trigram similarity, so typing "chick" finds "chicken breast" and
-typing "eggs" still finds "egg" even though normalization never merged
-those two.
+**Search uses pg_trgm, two ways.** `Ingredient.search` combines an `ILIKE`
+substring match with Postgres's trigram similarity operator (`%`). Typing
+"chick" finds "chicken breast" via the substring match.
 
 **No accounts.** The pantry is session-only. Auth wasn't part of the
 problem and the assignment specifically says not to add things that don't
